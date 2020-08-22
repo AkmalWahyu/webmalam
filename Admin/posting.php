@@ -9,6 +9,7 @@ function tambah($koneksi)
         $judul = $_POST['judul'];
         $konten = $_POST['konten'];
         $tanggal = $_POST['tanggal'];
+        $id_kategori = $_POST['id_kategori'];
 
         $foto = $_FILES['foto']['name'];
 
@@ -18,7 +19,7 @@ function tambah($koneksi)
             echo "Gambar Gagal di upload";
         }
 
-        $query_input = mysqli_query($koneksi, "INSERT INTO postingan VALUES(md5('$id'),'$judul','$konten','$tanggal','$foto','$id_user')");
+        $query_input = mysqli_query($koneksi, "INSERT INTO postingan VALUES(md5('$id'),'$judul','$konten','$tanggal','$foto','$id_user','$id_kategori')");
 
         if ($query_input) {
             echo '<script>alert("data berhasil di input")
@@ -55,6 +56,19 @@ function tambah($koneksi)
                                     <input type="date" class="form-control" id="exampleInputEmail3" placeholder="Tanggal" name="tanggal" value="" required>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Pilih Kategori</label>
+                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="id_user">
+                                    <?php
+
+                                    $show = mysqli_query($koneksi, "SELECT * FROM kategori k left join postingan p using (id_kategori);");
+
+                                    while ($data = mysqli_fetch_array($show)) {
+                                    ?>
+                                        <option value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori']; ?></option>
+                                    <?php } ?>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleInputName1">Foto Utama</label>
                                     <input type="file" name="foto" class="form-control">
