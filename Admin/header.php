@@ -51,7 +51,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <nav class="navbar default-layout col-lg-100 col-98 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.php">
           <img src="images/logo.svg" alt="logo" />
@@ -64,7 +64,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
         <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
           <li class="nav-item">
             <a href="#" class="nav-link">Schedule
-              <span class="badge badge-primary ml-1">New</span>
+              <span class="badge badge-danger ml-1">New</span>
             </a>
           </li>
           <li class="nav-item active">
@@ -139,7 +139,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <a class="dropdown-item">
-                <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+                <p class="mb-0 font-weight-normal float-left">You have 178975 new notifications
                 </p>
                 <span class="badge badge-pill badge-warning float-right">View all</span>
               </a>
@@ -190,7 +190,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text">Hello, <?php echo $_SESSION['username'];?> !</span>
-              <img class="img-xs rounded-circle" src="images/faces/face1.jpg" alt="Profile image">
+              <img class="img-xs rounded-circle" src="images/faces/face28.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -235,19 +235,19 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="images/faces/face1.jpg" alt="profile image">
+                  <img src="images/faces/face28.jpg" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo $_SESSION['username'];?></p>
                   <div>
-                    <small class="designation text-muted">Manager</small>
+                    <small class="designation text-muted"><?php echo $_SESSION['level'];?></small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <a href="posting.php" class="btn btn-success btn-block">New Post
+              <!-- <a href="posting.php" class="btn btn-success btn-block">New Post
                 <i class="mdi mdi-plus"></i>
-              </a>
+              </a> -->
             </div>
           </li>
           <!-- session admin -->
@@ -316,7 +316,26 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
           </li>
           <?php } else if($_SESSION['level'] == 'autor'){ ?>
           <li class="nav-item">
+            <a class="nav-link" href="postingan_autor.php">
+              <i class="menu-icon mdi mdi-television"></i>
+              <span class="menu-title">MEMPOSTING</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="menu-icon mdi mdi-restart"></i>
+              <span class="menu-title">User Data</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="biodata_user.php">Biodata User</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+            <!-- <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-restart"></i>
               <span class="menu-title">User Pages</span>
               <i class="menu-arrow"></i>
@@ -340,7 +359,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <?php } ?>
         </ul>
       </nav>

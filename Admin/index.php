@@ -585,7 +585,7 @@ function tambah($koneksi)
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <footer class="footer">
+        <!-- <footer class="footer">
           <div class="container-fluid clearfix">
             <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
               <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
@@ -593,7 +593,7 @@ function tambah($koneksi)
               <i class="mdi mdi-heart text-danger"></i>
             </span>
           </div>
-        </footer>
+        </footer> -->
         <!-- partial -->
       </div>
   

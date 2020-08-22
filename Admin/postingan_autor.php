@@ -24,12 +24,12 @@ function tambah($koneksi)
             echo '<script>alert("data berhasil di input")
             window.location.href="posting.php";
             window.history.back();
-        
-            </script>';
+           
+        </script>';
         } else {
             echo '<script>alert("data gagal di input")
             window.location.href="posting.php";
-            </script>';
+          </script>';
         }
     }
 
