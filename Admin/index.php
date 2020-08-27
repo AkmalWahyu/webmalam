@@ -114,8 +114,8 @@ function tambah($koneksi)
                   <div class="weather-date-location">
                     <h3>Monday</h3>
                     <p class="text-gray">
-                      <span class="weather-date">25 October, 2016</span>
-                      <span class="weather-location">London, UK</span>
+                      <span class="weather-date">25 Agustus, 2020</span>
+                      <span class="weather-location">Banda Aceh, Indonesia</span>
                     </p>
                   </div>
                   <div class="weather-data d-flex">
@@ -123,7 +123,7 @@ function tambah($koneksi)
                       <h4 class="display-3">21
                         <span class="symbol">&deg;</span>C</h4>
                       <p>
-                        Mostly Cloudy
+                        Berawan
                       </p>
                     </div>
                   </div>

@@ -14,7 +14,7 @@ function tambah($koneksi)
 
         $foto = $_FILES["foto"]["name"];
         if (move_uploaded_file($_FILES['foto']['tmp_name'], "upload/biodata/" . $_FILES['foto']['name'])) {
-            echo "Gambar Berhasil di upload";
+            echo "Gambar Berhasil diupload";
         } else {
             echo "Gambar Gagal diupload";
         }
@@ -23,13 +23,13 @@ function tambah($koneksi)
 
         if ($query_input) {
             echo '<script>alert("data berhasil di input")
-            window.location.href="biodata.php";
+            window.location.href="biodata_user.php";
             window.history.back();
         
         </script>';
         } else {
             echo '<script>alert("data gagal di input")
-            window.location.href="kategori.php";
+            window.location.href="biodata_user.php";
         </script>';
         }
     }
@@ -43,54 +43,35 @@ function tambah($koneksi)
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Form Data Kategori</h4>
+                            <h4 class="card-title">Form Data User</h4>
                             <p class="card-description">
-                                Masukkan Kategori
+                                Masukkan Data User
                             </p>
 
                             <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
                                 
                                 
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Pilih User</label>
-                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="id_user">
-                                        <option value="admin">Admin</option>
-                                        <option value="operator">Operator</option>
-                                        <option value="autor">Autor</option>
-                                        <?php 
-
-                                        $show  = mysqli_query($koneksi, "SELECT * FROM user");
-
-                                        while ($data = mysqli_fetch_array($show)) {
-                                        
-                                        ?>
-                                            <option value="<?= $data['id_user'] ?>"><?= $data['username'] . ' - ' . $data['level'] ?></option>
-                                        <?php } ?>
-                                        
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
                                     <label for="exampleInputName1">Nama User</label>
                                     <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="nama_user" value="" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputName1">Tempat Lahir</label>
-                                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="tempat_lahir" value="" required>
+                                    <input type="text" class="form-control" id="exampleinputName1" placeholder="Name" name="tempat_lahir" value="" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputName1">Tanggal Lahir</label>
-                                    <input type="date" class="form-control" id="exampleInputName1" placeholder="Name" name="tgl_lahir" value="" required>
+                                    <input type="date" class="form-control" id="exampleInputName1" placeholder="Name" name="tanggal_lahir" value="" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Laki-Laki</label>
-                                    <input type="radio" class="form-control" id="exampleInputName1" placeholder="Name" name="jenis_kelamin" value="Laki-Laki" required>
+                                    <label for="exampleInputName1">Laki-laki</label>
+                                    <input type="radio" class="form-control" id="exampleInputName1" placeholder="Name" name="jenis_kelamin" value="L" required>
                                     <label for="exampleInputName1">Perempuan</label>
-                                    <input type="radio" class="form-control" id="exampleInputName1" placeholder="Name" name="jenis_kelamin" value="perempuan" required>
+                                    <input type="radio" class="form-control" id="exampleinputName1" placeholder="Name" name="jenis_kelamin" value="P" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Alamat</label>
+                                    <label for="exampleinputName1">Alamat</label>
                                     <textarea name="alamat" id="" class="form-control"></textarea>
                                 </div>
 
@@ -99,19 +80,20 @@ function tambah($koneksi)
                                     <input type="file" name="foto" class="form-control">
                                 </div>
 
-
-                                <button type="submit" class="btn btn-success mr-2" type="submit" name="input_biodata">Submit</button>
-                                <button class="btn btn-light" type="reset">Reset</button>
+                                <button type="submit" class="btn btn-primary mr-2" type="submit" name="input_biodata">Submit</button>
+                                <button class="btn btn-secondary" type="reset">Reset</button>
                             </form>
 
                         </div>
                     </div>
                 </div>
 
+                                        
                 <!-- function menampilkan data di table -->
                 <?php
                 function tampil_data($koneksi)
                 {
+                    $id_user = $_SESSION['id_user'];
                     $sql =  "SELECT * FROM biodata WHERE id_user='$id_user'";
                     $query = mysqli_query($koneksi, $sql);
                 ?>
@@ -150,8 +132,8 @@ function tambah($koneksi)
                                                     </td>
 
                                                     <td>
-                                                        <a href="biodata.php?aksi=update&id=<?php echo $data['id_biodata']; ?>&nama=<?php echo $data['nama_kategori']; ?>" class="btn btn-warning">Edit</a>
-                                                        <a href="biodata.php?aksi=delete&id=<?php echo $data['id_biodata']; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
+                                                        <a href="biodata_user.php?aksi=update&id=<?php echo $data['id_biodata']; ?>&nama=<?php echo $data['nama_kategori']; ?>" class="btn btn-warning">Edit</a>
+                                                        <a href="biodata_user.php?aksi=delete&id=<?php echo $data['id_biodata']; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
                                                     </td>
                                                 </tr>
                                             <?php
@@ -199,11 +181,11 @@ function hapus($koneksi)
         if ($query_hapus) {
             if ($_GET['aksi'] == 'delete') {
                 echo '<script>alert("Data Berhasil dihapus")
-        window.location.href="biodata.php";
+        window.location.href="biodata_user.php";
         </script>';
             }
         } else {
-            echo '<script>alert("data gagal di hapus")</script>';
+            echo '<script>alert("data gagal dihapus")</script>';
         }
     }
 }

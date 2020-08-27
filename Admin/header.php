@@ -22,17 +22,17 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
   <!-- endinject -->
   <!-- datatable -->
   <link rel="stylesheet" href="vendors/datatables/Datatables/css/jquery.dataTables.css">
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/style.css">
   <!-- summernote -->
   <link rel="stylesheet" href="vendors/summernote/dist/summernote.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+  <!-- sweetalert -->
+  <link rel="stylesheet" href="vendors/sweetalert/dist/sweetalert.css">
   <style>
     .navbar.default-layout .navbar-brand-wrapper .navbar-brand {
-      color: #163f73;
+      color: #000000;
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
@@ -54,7 +54,8 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
     <nav class="navbar default-layout col-lg-100 col-98 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.php">
-          <img src="images/logo.svg" alt="logo" />
+          <!-- <img src="images/logo.svg" alt="logo" /> -->
+          <b>/JALAN TIKUNG\</b>
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.php">
           <img src="images/logo-mini.svg" alt="logo" />
@@ -189,7 +190,7 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">Hello, <?php echo $_SESSION['username'];?> !</span>
+              <span class="profile-text">Hola, <?php echo $_SESSION['username']; ?></span>
               <img class="img-xs rounded-circle" src="images/faces/face28.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -275,9 +276,6 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
                 <li class="nav-item">
                   <a class="nav-link" href="kategori.php">Kategori</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="typography.php">Typography</a>
-                </li>
               </ul>
             </div>
           </li>
@@ -294,26 +292,43 @@ if ($_SESSION['level'] != ("admin" || "operator" || "autor") || empty($_SESSION[
             </a>
           </li>
           <!-- session operator -->
-          <?php } else if($_SESSION['level'] == 'operator') { ?>
+          <?php } else if ($_SESSION['level'] == 'operator') { ?>
 
           <li class="nav-item">
-            <a class="nav-link" href="chartjs.php">
-              <i class="menu-icon mdi mdi-chart-line"></i>
-              <span class="menu-title">Charts</span>
+            <a class="nav-link" href="index.php">
+              <i class="menu-icon mdi mdi-television"></i>
+              <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="basic-table.php">
-              <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
+            <a class="nav-link" href="posting.php">
+              <i class="menu-icon mdi mdi-television"></i>
+              <span class="menu-title">MEMPOSTING</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="font-awesome.php">
-              <i class="menu-icon mdi mdi-sticker"></i>
-              <span class="menu-title">Icons</span>
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-content-copy"></i>
+              <span class="menu-title">Data Master</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="kategori.php">Kategori</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="biodata.php">
+              <i class="menu-icon mdi mdi-content-paste"></i>
+              <span class="menu-title">Info Biodata User</span>
             </a>
           </li>
+
+          <!-- session author -->
           <?php } else if($_SESSION['level'] == 'autor'){ ?>
           <li class="nav-item">
             <a class="nav-link" href="postingan_autor.php">

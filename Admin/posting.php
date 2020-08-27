@@ -14,9 +14,9 @@ function tambah($koneksi)
         $foto = $_FILES['foto']['name'];
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], "upload/postingan/" . $_FILES['foto']['name'])) {
-            echo "Gambar Berhasil diupload";
+            echo "Gambar berhasil diupload";
         } else {
-            echo "Gambar Gagal di upload";
+            echo "Gambar gagal diupload";
         }
 
         $query_input = mysqli_query($koneksi, "INSERT INTO postingan VALUES(md5('$id'),'$judul','$konten','$tanggal','$foto','$id_user','$id_kategori')");
@@ -61,14 +61,16 @@ function tambah($koneksi)
                                     <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="id_user">
                                     <?php
 
-                                    $show = mysqli_query($koneksi, "SELECT * FROM kategori k left join postingan p using (id_kategori);");
+                                    $show = mysqli_query($koneksi, "SELECT * FROM kategori k left join postingan p USING(id_kategori);");
 
                                     while ($data = mysqli_fetch_array($show)) {
                                     ?>
-                                        <option value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori']; ?></option>
+                                        <option value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori'] ?></option>
                                     <?php } ?>
+                                    
                                     </select>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputName1">Foto Utama</label>
                                     <input type="file" name="foto" class="form-control">
@@ -121,9 +123,9 @@ function tambah($koneksi)
                                                         <td><?php echo $data['judul']; ?></td>
                                                         <td><?php echo $data['tgl_release']; ?></td>
                                                         <td>
-                                                            <a href="edit_user.php?id=<?php echo $data['id_user'] ?>" class="btn btn-warning">Edit</a>
+                                                            <a href="posting.php?id=<?php echo $data['id_user'] ?>" class="btn btn-warning">Edit</a>
                                                             <a href="" class="btn btn-info">View</a>
-                                                            <a href="proses/proses_hapus.php?id=<?php echo $data['id_user'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
+                                                            <a href="posting.php?aksi=delete&id=<?php echo $data['id_postingan'] ?>" onclick="return confirm('Apakah anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
                                                         </td>
                                                     </tr>
                                             <?php
@@ -152,11 +154,34 @@ function tambah($koneksi)
         </footer> -->
         <!-- partial -->
     </div>
-<?php }
-            } ?>
+<?php 
+                }
+            } 
+?>
+<!-- function delete -->
 <?php
+function hapus ($koneksi)
+{
+    if (issett($_GET['id']) && isset($_GET['aksi'])) {
+        $id = $_GET['id'];
 
-// logika proses aksinya
+        $query_hapus = mysqli_query($koneksi, "DELETE FROM postingan WHERE id_postingan='$id'");
+        if ($query_hapus) {
+            if ($_GET['aksi'] == 'delete') {
+                echo '<script>alert("Data berhasil dihapus")
+                window.location.href="posting.php";
+                </script>';
+            }
+        } else {
+            echo '<script>alert("data gagal dihapus")</script>';
+        }
+    }
+}
+?>
+
+
+<!-- logika proses aksinya -->
+<?php
 if (isset($_GET['aksi'])) {
     switch ($_GET['aksi']) {
         case "create":

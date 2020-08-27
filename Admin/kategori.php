@@ -60,7 +60,7 @@ function tambah($koneksi)
 
                         <button type="submit" class="btn btn-success mr-2" type="submit" 
                         name="input_kategori">Submit</button>
-                        <button class="btn btn-light" type="reset">Reset</button>
+                        <button class="btn btn-dark" type="reset">Reset</button>
                       </form>
 
                     </div>
@@ -80,7 +80,7 @@ function tambah($koneksi)
                   <div class="card-body">
                     <h4 class="card-title">Tabel Kategori</h4>
                     <div class="table-responsive">
-                      <table class="table table-striped table-boreder data">
+                      <table class="table table-striped table-border data">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -97,7 +97,7 @@ function tambah($koneksi)
                               <td><?php echo $no ?></td>
                               <td><?php echo $data['nama_kategori'] ?></td>
                               <td>
-                                <a href="kategori.php?aksi=update&id=<?php echo $data ['id_kategori'];?>&nama_kategori=<?php echo $data['nama_kategori'];?>" class="btn btn-warning">Edit</a>
+                                <a href="kategori.php?aksi=update&id=<?php echo $data ['id_kategori'];?>&nama_kategori=<?php echo $data['nama_kategori'];?>" class="btn btn-light">Edit</a>
                                 <a href="kategori.php?aksi=delete&id=<?php echo $data ['id_kategori']; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus?')" class="btn btn-danger">Hapus</a>
                               </td>
                             </tr>
@@ -134,6 +134,56 @@ function tambah($koneksi)
     }
 ?>
 
+
+
+<!-- function update -->
+<?php
+function ubah($koneksi)
+{
+  if (isset($_POST['input_kategori'])) {
+    $id = $_POST['id_kategori'];
+    $nama = $_POST['nama_kategori'];
+    if (!empty($nama)) {
+      $query_update = mysqli_query($koneksi, "UPDATE kategori SET nama_kategori='$nama' WHERE id_kategori= '$id'");
+      if ($query_update && isset($_GET['aksi'])) {
+        if ($_GET['aksi'] == 'update') {
+          echo '<script>alert("data berhasil diupdate");
+          window.location.href="kategori.php";
+          </script>';
+          }
+        } else {
+          echo '<script>alert("data gagal diupdate")</script>';
+        }
+    }
+  } 
+
+  if (isset($_GET['id'])) { ?>
+  <div class="col-md-12 d-flex grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Form Data Kategori</h4>
+                        <p class="card-description">Masukkan Kategori </p>
+                
+                        <form class="forms-sample" action="" method="POST">
+                        <input type="hidden" name="id_kategori" value="<?php echo $_GET['id']; ?>">
+                        <div class="form-group">
+                            <label for="exampleInputName1">Nama Kategori</label>
+                            <input type="text" class="form-control" id="exampleInputNamel1" placeholder="Name" name="nama_kategori" value="<?php echo $_GET['nama_kategori']; ?>" required>
+                        </div>
+
+
+                        <button class="btn btn-success mr-2" type="submit" name="ubah_kategori">Update</button>
+                        <button class="btn btn-light" type="reset">Reset</button>
+                      </form>
+
+                    </div>
+                </div>
+            </div>
+          <?php
+            } 
+          }
+          ?>
+          
 <!-- function hapus -->
 <?php
 function hapus($koneksi) 
@@ -156,62 +206,14 @@ function hapus($koneksi)
 ?>
 
 
-<!-- function update -->
-<?php
-function ubah($koneksi)
-{
-  if (isset($_POST['input_kategori'])) {
-    $id = $_POST['id_kategori'];
-    $nama = $_POST['nama_kategori'];
-    if (!empty($nama)) {
-      $query_update = mysqli_query($koneksi, "UPDATE kategori SET nama_kategori='$nama' WHERE id_kategori= '$id'");
-      if ($query_update && isset($_GET['aksi'])) {
-        if ($_GET['aksi'] == 'update') {
-          echo '<script>alert("data berhasil diupdate");
-          window.location.href="kategori.php"</script>';
-          }
-        } else {
-          echo '<script>alert("data gagal diupdate")</script>';
-        }
-    }
-  } 
-  if (isset($_GET['id'])) { ?>
-
-  <div class="col-md-12 d-flex grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Form Data Kategori</h4>
-                        <p class="card-description">Masukkan Kategori </p>
-                
-                        <form class="forms-sample" action="" method="POST">
-                        <input type="hidden" name="id_kategori" value="<?php echo $_GET['id']; ?>">
-                        <div class="form-group">
-                            <label for="exampleInputName1">Nama Kategori</label>
-                            <input type="text" class="form-control" id="exampleInputNamel1" placeholder="Name" name="nama_kategori" value="<?php echo $_GET['nama_kategori']; ?>" required>
-                        </div>
-
-
-                        <button type="submit" class="btn btn-success mr-2" type="submit" 
-                        name="input_kategori">Submit</button>
-                        <button class="btn btn-light" type="reset">Reset</button>
-                      </form>
-
-                    </div>
-                </div>
-            </div>
-          <?php
-            } 
-          }
-          ?>
-
-
 <!-- // proses aksi -->
 <?php
 if (isset($_GET['aksi'])) {
   switch ($_GET['aksi']) {
     case 'create':
       echo '';
-      tambah($koneksi);    
+      tambah($koneksi);
+      tampil_data($kneksi);
       break;
     case "read":
       tampil_data($koneksi);
@@ -236,3 +238,7 @@ if (isset($_GET['aksi'])) {
 
 
 <?php include 'footer.php' ?>
+
+</body>
+
+</html>                                       
